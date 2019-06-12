@@ -80,7 +80,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         // Call firebase log event
 
-        logFirebaseArray(DummyContent.firebase_items, "Item List", FirebaseAnalytics.Event.VIEW_ITEM_LIST);
+        logFirebase(FirebaseAnalytics.Event.VIEW_ITEM_LIST, DummyContent.firebase_items);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -100,7 +100,7 @@ public class ItemListActivity extends AppCompatActivity {
 
                 // Call firebase log event
 
-                logFirebase((Bundle)DummyContent.firebase_items.get(item.position), "Item List", FirebaseAnalytics.Event.SELECT_CONTENT);
+                logFirebase(FirebaseAnalytics.Event.SELECT_CONTENT, (Bundle)DummyContent.firebase_items.get(item.position));
 
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
@@ -161,11 +161,11 @@ public class ItemListActivity extends AppCompatActivity {
         }
     }
 
-    public static void logFirebaseArray(ArrayList arrayListray, String listname, String event) {
+    public static void logFirebaseArray(ArrayList arrayList, String listname, String event) {
         // Prepare ecommerce bundle
 
         Bundle ecommerceBundle = new Bundle();
-        ecommerceBundle.putParcelableArrayList("items", arrayListray);
+        ecommerceBundle.putParcelableArrayList("items", arrayList);
 
         // Set relevant bundle-level parameters
 
@@ -187,6 +187,17 @@ public class ItemListActivity extends AppCompatActivity {
         ecommerceBundle.putString(FirebaseAnalytics.Param.ITEM_LIST, listname);
 
         // Log view_item_list event with ecommerce bundle
+
+        mFirebaseAnalytics.logEvent(event, ecommerceBundle);
+    }
+
+    public static void logFirebase(String event, Bundle bundle) {
+        mFirebaseAnalytics.logEvent(event, bundle);
+    }
+
+    public static void logFirebase(String event, ArrayList arrayList) {
+        Bundle ecommerceBundle = new Bundle();
+        ecommerceBundle.putParcelableArrayList("items", arrayList);
 
         mFirebaseAnalytics.logEvent(event, ecommerceBundle);
     }
