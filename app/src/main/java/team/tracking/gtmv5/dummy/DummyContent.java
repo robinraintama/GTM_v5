@@ -58,7 +58,7 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(position, String.valueOf(position), "Item " + position, "brand " + position, "category " + position, "variant " + position, "IDR", position * 10000);
+        return new DummyItem(position-1, String.valueOf(position), "Item " + position, "brand " + position, "category " + position, "variant " + position, "IDR", position * 10000);
     }
 
     /**

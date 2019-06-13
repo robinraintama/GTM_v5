@@ -80,7 +80,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         // Call firebase log event
 
-        logFirebase(FirebaseAnalytics.Event.VIEW_ITEM_LIST, DummyContent.firebase_items);
+        logFirebaseArray(DummyContent.firebase_items, "List Name", FirebaseAnalytics.Event.VIEW_ITEM_LIST);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -100,7 +100,7 @@ public class ItemListActivity extends AppCompatActivity {
 
                 // Call firebase log event
 
-                logFirebase(FirebaseAnalytics.Event.SELECT_CONTENT, (Bundle)DummyContent.firebase_items.get(item.position));
+                logFirebase((Bundle)DummyContent.firebase_items.get(item.position), "Item List", FirebaseAnalytics.Event.SELECT_CONTENT);
 
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
@@ -171,7 +171,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         ecommerceBundle.putString(FirebaseAnalytics.Param.ITEM_LIST, listname);
 
-        // Log view_item_list event with ecommerce bundle
+        // Log event with ecommerce bundle
 
         mFirebaseAnalytics.logEvent(event, ecommerceBundle);
     }
@@ -186,18 +186,24 @@ public class ItemListActivity extends AppCompatActivity {
 
         ecommerceBundle.putString(FirebaseAnalytics.Param.ITEM_LIST, listname);
 
-        // Log view_item_list event with ecommerce bundle
+        // Log event with ecommerce bundle
 
         mFirebaseAnalytics.logEvent(event, ecommerceBundle);
     }
 
     public static void logFirebase(String event, Bundle bundle) {
+        // Log event with bundle
+
         mFirebaseAnalytics.logEvent(event, bundle);
     }
 
     public static void logFirebase(String event, ArrayList arrayList) {
+        // Prepare ecommerce bundle
+
         Bundle ecommerceBundle = new Bundle();
         ecommerceBundle.putParcelableArrayList("items", arrayList);
+
+        // Log event with bundle
 
         mFirebaseAnalytics.logEvent(event, ecommerceBundle);
     }
