@@ -170,6 +170,7 @@ public class ItemListActivity extends AppCompatActivity {
         // Set relevant bundle-level parameters
 
         ecommerceBundle.putString(FirebaseAnalytics.Param.ITEM_LIST, listname);
+        ecommerceBundle.putString("screen", "Item List");
 
         // Log event with ecommerce bundle
 
@@ -181,6 +182,9 @@ public class ItemListActivity extends AppCompatActivity {
 
         Bundle ecommerceBundle = new Bundle();
         ecommerceBundle.putBundle("items", bundle);
+        ecommerceBundle.putString("eventCategory", "Catalog");
+        ecommerceBundle.putString("eventAction", "Click on product");
+        ecommerceBundle.putString("eventLabel", bundle.getString(FirebaseAnalytics.Param.ITEM_NAME));
 
         // Set relevant bundle-level parameters
 

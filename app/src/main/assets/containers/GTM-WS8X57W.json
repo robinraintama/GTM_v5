@@ -1,12 +1,18 @@
 {
 
-"fingerprint":"Ng$0",
+"fingerprint":"MTI$0",
 
 "resource": {
-  "version":"6",
+  "version":"12",
   "macros":[{
       "function":"__e",
       "instance_name":"Event Name"
+    },{
+      "function":"__md",
+      "instance_name":"Screen Name Value",
+      "vtp_setDefaultValue":false,
+      "vtp_eventType":"CUSTOM",
+      "vtp_key":"screen"
     },{
       "function":"__c",
       "instance_name":"GA tracking id",
@@ -15,17 +21,46 @@
       "function":"__gas",
       "instance_name":"GA Configuration",
       "vtp_collectAdid":false,
-      "vtp_trackingId":["macro",1],
+      "vtp_trackingId":["macro",2],
       "vtp_enableRecaptchaOption":false,
       "vtp_enableUaRlsa":false,
       "vtp_enableUseInternalVersion":false,
       "vtp_enableFirebaseEcommerce":false
     },{
+      "function":"__md",
+      "instance_name":"Event Value",
+      "vtp_setDefaultValue":true,
+      "vtp_defaultValue":"unknown value",
+      "vtp_eventType":"CUSTOM",
+      "vtp_key":"eventValue"
+    },{
+      "function":"__md",
+      "instance_name":"Event Category",
+      "vtp_setDefaultValue":true,
+      "vtp_defaultValue":"unknown category",
+      "vtp_eventType":"CUSTOM",
+      "vtp_key":"eventCategory"
+    },{
+      "function":"__md",
+      "instance_name":"Event Action",
+      "vtp_setDefaultValue":true,
+      "vtp_defaultValue":"unknown action",
+      "vtp_eventType":"CUSTOM",
+      "vtp_key":"eventAction"
+    },{
+      "function":"__md",
+      "instance_name":"Event Label",
+      "vtp_setDefaultValue":true,
+      "vtp_defaultValue":"unknown label",
+      "vtp_eventType":"CUSTOM",
+      "vtp_key":"eventLabel"
+    },{
       "function":"__e",
       "instance_name":"_event"
     },{
-      "function":"__r",
-      "instance_name":"_random"
+      "function":"__c",
+      "instance_name":"Screen Name",
+      "vtp_value":"screenName"
     },{
       "function":"__ai",
       "instance_name":"App ID"
@@ -40,9 +75,10 @@
       "function":"__ua",
       "once_per_event":true,
       "vtp_overrideGaSettings":true,
+      "vtp_fieldsToSet":["list",["map","fieldName","screenName","value",["macro",1]]],
       "vtp_trackType":"TRACK_SCREENVIEW",
       "vtp_readDataFrom":"FIREBASE_EVENT_DATA",
-      "vtp_gaSettings":["macro",2],
+      "vtp_gaSettings":["macro",3],
       "vtp_enableEcommerce":true,
       "vtp_enableRecaptchaOption":false,
       "vtp_enableUaRlsa":false,
@@ -56,12 +92,14 @@
       "once_per_event":true,
       "vtp_nonInteraction":false,
       "vtp_overrideGaSettings":true,
-      "vtp_eventCategory":"Ecommerce",
+      "vtp_eventValue":["macro",4],
+      "vtp_eventCategory":["macro",5],
       "vtp_trackType":"TRACK_EVENT",
       "vtp_readDataFrom":"FIREBASE_EVENT_DATA",
-      "vtp_gaSettings":["macro",2],
+      "vtp_gaSettings":["macro",3],
       "vtp_sendFirebaseCampaignData":true,
-      "vtp_eventAction":"Product Click",
+      "vtp_eventAction":["macro",6],
+      "vtp_eventLabel":["macro",7],
       "vtp_enableEcommerce":true,
       "vtp_enableRecaptchaOption":false,
       "vtp_enableUaRlsa":false,
@@ -72,12 +110,8 @@
       "vtp_enableFirebaseEcommerce":true,
       "tag_id":2
     },{
-      "function":"__img",
-      "once_per_event":true,
-      "vtp_useCacheBuster":true,
-      "vtp_url":"https:\/\/raintama.matomo.cloud\/matomo.php?idsite=1\u0026rec=1\u0026action_name=select_content",
-      "vtp_cacheBusterQueryParam":"gtmcb",
-      "vtp_randomNumber":["macro",4],
+      "function":"__paused",
+      "vtp_originalTagType":"img",
       "tag_id":3
     }],
   "predicates":[{
@@ -85,13 +119,23 @@
       "arg0":["macro",0],
       "arg1":"view_item_list"
     },{
+      "function":"_eq",
+      "arg0":["macro",0],
+      "arg1":"view_item"
+    },{
+      "function":"_eq",
+      "arg0":["macro",0],
+      "arg1":"select_content"
+    },{
       "function":"_re",
-      "arg0":["macro",3],
+      "arg0":["macro",8],
       "arg1":".*"
     }],
   "rules":[
     [["if",0],["add",0]],
-    [["if",1],["add",1,2]]]
+    [["if",1],["add",0]],
+    [["if",2],["add",1]],
+    [["if",3],["add",2]]]
 },
 "runtime":
 [
@@ -112,7 +156,7 @@
 
 
 
-[50,"__r_main",[46],[36,[2,[17,[15,"gtmUtils"],"mobile"],"random",[7,0,2.147483647E9]]]],[50,"__r",[46,"data"],[36,["__r_main",[15,"data"]]]],
+
 
 
 
@@ -127,10 +171,10 @@
 
 
 
+[50,"__paused_main",[46]],[50,"__paused",[46,"data"],[36,["__paused_main",[15,"data"]]]],
+[50,"__md_main",[46,"a"],[41,"b","c","d","e","f","g","h","i","j","k","l"],[22,[12,[17,[15,"a"],"eventType"],"CUSTOM"],[46,[3,"b",[16,[15,"a"],"key"]]],[46,[22,[12,[17,[15,"a"],"eventType"],"SUGGESTED"],[46,[47,"c",[15,"a"],[46,[3,"d",[2,[15,"c"],"lastIndexOf",[7,"Param"]]],[22,[1,[29,[15,"d"],[27,1]],[12,[15,"d"],[37,[17,[15,"c"],"length"],5]]],[46,[22,[20,[15,"b"],[44]],[46,[3,"b",[16,[15,"a"],[15,"c"]]]],[46,[2,[17,[15,"gtmUtils"],"common"],"log",[7,"e",[0,[0,[0,"Ignoring unexpected additional parameter ","key in the data (key \u003d \""],[15,"c"]],"\")."]]]]]]]]]],[46,[22,[20,[17,[15,"a"],"eventType"],[44]],[46,[2,[17,[15,"gtmUtils"],"common"],"log",[7,"w","Missing expected eventType param"]],[3,"b",[16,[15,"a"],"key"]]],[46,[2,[17,[15,"gtmUtils"],"common"],"log",[7,"e",[0,"Unexpected eventType param value: ",[17,[15,"a"],"eventType"]]]],[36]]]]]]],[22,[20,[15,"b"],[44]],[46,[2,[17,[15,"gtmUtils"],"common"],"log",[7,"e","No parameter key specified in the data."]],[36]]],[3,"e",[30,[2,[17,[15,"gtmUtils"],"mobile"],"eventParameters",[7]],[8]]],[22,[12,[2,[15,"b"],"indexOf",[7,"."]],[27,1]],[46,[3,"f",[16,[15,"e"],[15,"b"]]],[22,[1,[1,[20,[15,"f"],[44]],[12,[17,[15,"a"],"eventType"],"SUGGESTED"]],[17,[15,"a"],"checkEcommerceValue"]],[46,[3,"g",[7,"items","promotions"]],[47,"h",[15,"g"],[46,[3,"i",[16,[15,"g"],[15,"h"]]],[22,[21,[16,[15,"e"],[15,"i"]],[44]],[46,[3,"j",[16,[15,"e"],[15,"i"]]],[22,[2,[17,[15,"gtmUtils"],"common"],"isArray",[7,[15,"j"]]],[46,[22,[21,[16,[16,[15,"j"],0],[15,"b"]],[44]],[46,[36,[16,[16,[15,"j"],0],[15,"b"]]]]]],[46,[22,[21,[16,[15,"j"],[15,"b"]],[44]],[46,[36,[16,[15,"j"],[15,"b"]]]]]]]]]]]]]],[46,[3,"k",[2,[17,[15,"gtmUtils"],"common"],"split",[7,[15,"b"],"."]]],[3,"f",[15,"e"]],[47,"l",[15,"k"],[46,[3,"f",[16,[15,"f"],[16,[15,"k"],[15,"l"]]]],[22,[20,[15,"f"],[44]],[46,[4]]]]]]],[22,[21,[15,"f"],[44]],[46,[36,[15,"f"]]],[46,[22,[21,[17,[15,"a"],"defaultValue"],[44]],[46,[36,[17,[15,"a"],"defaultValue"]]],[46,[2,[17,[15,"gtmUtils"],"common"],"log",[7,"w",[0,[0,"Event does not have parameter \"",[15,"b"]],"\" and no default value was defined. Returning \"undefined\"."]]]]]]]],[50,"__md",[46,"data"],[36,["__md_main",[15,"data"]]]],
 
 
-
-[50,"__img_main",[46,"a"],[41,"b","c","d","e","f"],[22,[29,[40,[17,[15,"a"],"url"]],"string"],[46,[36]]],[3,"b",[17,[15,"a"],"url"]],[3,"c",[17,[15,"a"],"useCacheBuster"]],[22,[15,"c"],[46,[3,"d",[17,[15,"a"],"cacheBusterQueryParam"]],[22,[28,[15,"d"]],[46,[3,"d","gtmcb"]]],[3,"e",[2,[15,"b"],"charAt",[7,[37,[17,[15,"b"],"length"],1]]]],[3,"f",[39,[19,[2,[15,"b"],"indexOf",[7,"?"]],0],[39,[30,[12,[15,"e"],"?"],[12,[15,"e"],"\u0026"]],"","\u0026"],"?"]],[3,"b",[0,[15,"b"],[0,[0,[0,[15,"f"],[15,"d"]],"\u003d"],[17,[15,"a"],"randomNumber"]]]]]],[2,[17,[15,"gtmUtils"],"mobile"],"arbitraryPixel",[7,[15,"b"],[44],[44]]]],[50,"__img",[46,"data"],[36,["__img_main",[15,"data"]]]],
 
 
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import androidx.fragment.app.Fragment;
 
@@ -31,6 +32,7 @@ public class ItemDetailFragment extends Fragment {
      * The dummy name this fragment is presenting.
      */
     private DummyContent.DummyItem mItem;
+    private static FirebaseAnalytics mFirebaseAnalytics;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -54,6 +56,14 @@ public class ItemDetailFragment extends Fragment {
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.name);
             }
+
+            // Get firebase analytics instance
+
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this.getActivity());
+
+            // Call firebase log event
+
+            logFirebase((Bundle) DummyContent.firebase_items.get(mItem.position), FirebaseAnalytics.Event.VIEW_ITEM);
         }
     }
 
@@ -68,5 +78,17 @@ public class ItemDetailFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+    public static void logFirebase(Bundle bundle, String event) {
+        // Prepare ecommerce bundle
+
+        Bundle ecommerceBundle = new Bundle();
+        ecommerceBundle.putBundle("items", bundle);
+        ecommerceBundle.putString("screen", "Item Detail");
+
+        // Log event with ecommerce bundle
+
+        mFirebaseAnalytics.logEvent(event, ecommerceBundle);
     }
 }
