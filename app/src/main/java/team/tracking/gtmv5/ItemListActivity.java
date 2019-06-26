@@ -80,7 +80,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         // Call firebase log event
 
-        logFirebaseArray(DummyContent.firebase_items, "List Name", FirebaseAnalytics.Event.VIEW_ITEM_LIST);
+        logFirebaseArray(DummyContent.firebase_items, "Product List", FirebaseAnalytics.Event.VIEW_ITEM_LIST);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -100,7 +100,7 @@ public class ItemListActivity extends AppCompatActivity {
 
                 // Call firebase log event
 
-                logFirebase((Bundle)DummyContent.firebase_items.get(item.position), "Item List", FirebaseAnalytics.Event.SELECT_CONTENT);
+                logFirebase((Bundle)DummyContent.firebase_items.get(item.position), "Product List", FirebaseAnalytics.Event.SELECT_CONTENT);
 
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
