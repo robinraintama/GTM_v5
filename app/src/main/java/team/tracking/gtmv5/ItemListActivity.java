@@ -59,6 +59,8 @@ public class ItemListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                logFirebaseFab();
             }
         });
 
@@ -172,6 +174,10 @@ public class ItemListActivity extends AppCompatActivity {
         ecommerceBundle.putString(FirebaseAnalytics.Param.ITEM_LIST, listname);
         ecommerceBundle.putString("screen", "Item List");
 
+        // Add Custom Dimension Shop ID (Hit)
+
+//        ecommerceBundle.putString("shopId", "Tracking Store");
+
         // Log event with ecommerce bundle
 
         mFirebaseAnalytics.logEvent(event, ecommerceBundle);
@@ -186,6 +192,10 @@ public class ItemListActivity extends AppCompatActivity {
         ecommerceBundle.putString("eventAction", "Click on product");
         ecommerceBundle.putString("eventLabel", bundle.getString(FirebaseAnalytics.Param.ITEM_NAME));
 
+        // Add Custom Dimension Shop ID (Hit)
+
+//        ecommerceBundle.putString("shopId", "Tracking Store");
+
         // Set relevant bundle-level parameters
 
         ecommerceBundle.putString(FirebaseAnalytics.Param.ITEM_LIST, listname);
@@ -195,10 +205,15 @@ public class ItemListActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent(event, ecommerceBundle);
     }
 
-    public static void logFirebase(String event, Bundle bundle) {
+    public static void logFirebaseFab() {
+        Bundle bundle = new Bundle();
+
+        bundle.putString("eventCategory", "Catalog");
+        bundle.putString("eventAction", "Click on fab");
+
         // Log event with bundle
 
-        mFirebaseAnalytics.logEvent(event, bundle);
+        mFirebaseAnalytics.logEvent("click_fab", bundle);
     }
 
     public static void logFirebase(String event, ArrayList arrayList) {

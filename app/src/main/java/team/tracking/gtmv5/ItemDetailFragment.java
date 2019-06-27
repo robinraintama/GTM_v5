@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import team.tracking.gtmv5.dummy.DummyContent;
@@ -63,7 +65,7 @@ public class ItemDetailFragment extends Fragment {
 
             // Call firebase log event
 
-            logFirebase((Bundle) DummyContent.firebase_items.get(mItem.position), FirebaseAnalytics.Event.VIEW_ITEM);
+            logFirebase((Bundle) DummyContent.firebase_items.get(mItem.position), FirebaseAnalytics.Event.VIEW_ITEM, true);
         }
     }
 
@@ -77,15 +79,38 @@ public class ItemDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.brand);
         }
 
+        ((Button) rootView.findViewById(R.id.button_atc)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = (Bundle) DummyContent.firebase_items.get(mItem.position);
+                logFirebase(bundle, FirebaseAnalytics.Event.ADD_TO_CART, false);
+
+                Snackbar.make(view, bundle.getString(FirebaseAnalytics.Param.ITEM_NAME) + " added to cart", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         return rootView;
     }
 
-    public static void logFirebase(Bundle bundle, String event) {
+    public static void logFirebase(Bundle bundle, String event, boolean isScreen) {
         // Prepare ecommerce bundle
 
         Bundle ecommerceBundle = new Bundle();
         ecommerceBundle.putBundle("items", bundle);
-        ecommerceBundle.putString("screen", "Item Detail");
+
+        // Add Custom Dimension Shop ID (Hit)
+
+//        ecommerceBundle.putString("shopId", "Tracking Store");
+
+        // Send param key "screen" to record screen view
+        if (isScreen) {
+            ecommerceBundle.putString("screen", "Item Detail");
+        } else {
+            ecommerceBundle.putString("eventCategory", "Item Detail");
+            ecommerceBundle.putString("eventAction", "Click add to cart");
+            ecommerceBundle.putString("eventLabel", bundle.getString(FirebaseAnalytics.Param.ITEM_NAME));
+        }
 
         // Log event with ecommerce bundle
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -16,6 +17,8 @@ import androidx.core.app.NavUtils;
 
 import android.view.MenuItem;
 
+import team.tracking.gtmv5.dummy.DummyContent;
+
 /**
  * An activity representing a single Item detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
@@ -24,6 +27,8 @@ import android.view.MenuItem;
  */
 public class ItemDetailActivity extends AppCompatActivity {
 
+    private static FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +36,18 @@ public class ItemDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
+        // Get firebase analytics instance
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                logFirebaseFab();
             }
         });
 
@@ -84,5 +95,16 @@ public class ItemDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void logFirebaseFab() {
+        Bundle bundle = new Bundle();
+
+        bundle.putString("eventCategory", "Item Detail");
+        bundle.putString("eventAction", "Click on fab");
+
+        // Log event with bundle
+
+        mFirebaseAnalytics.logEvent("click_fab", bundle);
     }
 }
