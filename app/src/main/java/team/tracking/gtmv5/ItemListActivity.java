@@ -192,9 +192,9 @@ public class ItemListActivity extends AppCompatActivity {
         ecommerceBundle.putString("eventAction", "Click on product");
         ecommerceBundle.putString("eventLabel", bundle.getString(FirebaseAnalytics.Param.ITEM_NAME));
 
-        // Add Custom Dimension Shop ID (Hit)
+        // Add Custom Dimension User ID (Hit)
 
-//        ecommerceBundle.putString("shopId", "Tracking Store");
+        ecommerceBundle.putString("userId", "robin");
 
         // Set relevant bundle-level parameters
 
@@ -210,6 +210,10 @@ public class ItemListActivity extends AppCompatActivity {
 
         bundle.putString("eventCategory", "Catalog");
         bundle.putString("eventAction", "Click on fab");
+
+        // Add Custom Dimension User ID (Hit)
+
+        bundle.putString("userId", "robin");
 
         // Log event with bundle
 

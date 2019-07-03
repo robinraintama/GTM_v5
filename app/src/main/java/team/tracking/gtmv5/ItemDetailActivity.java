@@ -103,6 +103,10 @@ public class ItemDetailActivity extends AppCompatActivity {
         bundle.putString("eventCategory", "Item Detail");
         bundle.putString("eventAction", "Click on fab");
 
+        // Add Custom Dimension User ID (Hit)
+
+        bundle.putString("userId", "robin");
+
         // Log event with bundle
 
         mFirebaseAnalytics.logEvent("click_fab", bundle);

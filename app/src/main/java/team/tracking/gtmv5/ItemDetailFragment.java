@@ -99,9 +99,9 @@ public class ItemDetailFragment extends Fragment {
         Bundle ecommerceBundle = new Bundle();
         ecommerceBundle.putBundle("items", bundle);
 
-        // Add Custom Dimension Shop ID (Hit)
+        // Add Custom Dimension User ID (Hit)
 
-//        ecommerceBundle.putString("shopId", "Tracking Store");
+        ecommerceBundle.putString("userId", "robin");
 
         // Send param key "screen" to record screen view
         if (isScreen) {

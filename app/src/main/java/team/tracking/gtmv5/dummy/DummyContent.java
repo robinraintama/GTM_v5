@@ -54,6 +54,7 @@ public class DummyContent {
         bundle.putString(FirebaseAnalytics.Param.CURRENCY, item.currency);
         bundle.putDouble(FirebaseAnalytics.Param.PRICE, item.price);
         bundle.putLong(FirebaseAnalytics.Param.INDEX, item.position);
+        bundle.putString("dimension1", "Shop " + item.id);
         firebase_items.add(bundle);
     }
 
